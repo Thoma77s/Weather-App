@@ -3,13 +3,15 @@ var cityFormEl = document.querySelector("#city-form");
 var cityContainerEl = document.querySelector(".city-container")
 var savedLocationsEl = document.querySelector(".saved-locations")
 
+
 var getWeather = function(city) {
-  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=dbbeec1bf54bcb81d72b38e62ca7b85d";
+  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=dc2556c07508f18009a5420cc2296743";
   
   //make a request to the urlT
   fetch(apiUrl).then(function(response) {
     if (response.ok) {
     response.json().then(function(city) {
+      console.log(city);
       displayWeather(city);
     });
   }else {
@@ -22,7 +24,7 @@ var getWeather = function(city) {
   }
 
   var formSubmitHandler = function(event) {
-    const citiesContainer = document.getElementById('cities-container');
+    const citiesContainer = document.getElementById('city-container');
     citiesContainer.innerHTML = "";
     event.preventDefault();
     var city = locationInputEl.value.trim();
@@ -37,32 +39,27 @@ var getWeather = function(city) {
   }
 
   var displayWeather = function(city) {
-    // check if api returned any breweries
+    // check if api returned anything
     if (city.length === 0) {
-      breweryContainerEl.textContent = 'No breweries found.';
+      cityContainerEl.textContent = 'City Not Found.';
       return;
     }  
-    createCityCards(city);
+     createCityCards(city);
   };
 
-  function createCityCards(cities) { 
-    const citiesContainer = document.getElementById('cities-container');
-    // Select the card-template in the DOM
-    const cardTemplate = document.getElementById('card-template');
-    cities.forEach((city) => {
-      // Create a cardTemplate element in javascript to start populating data
-      const card = document.importNode(cardTemplate.content, true);
-      card.querySelector('.card-name').textContent = city.name;
-      card.querySelector('.card-breweryType').textContent = city.brewery_type;
-      card.querySelector('.address-street').textContent = city.street;
-      card.querySelector('.address-city').textContent = city.city;
-      card.querySelector('.address-state').textContent = city.state;
-      card.querySelector('.address-postal').textContent = city.postal;
-      card.querySelector('.card-phone').textContent = city.phone;
-      card.querySelector('.card-website-url').textContent = city.website_url;
-      card.querySelector('.card-website-url').setAttribute("href", city.website_url);
-      citiesContainer.appendChild(card);
-    });
-  };
+   function createCityCards(city) { 
+    const citiesContainer = document.getElementById('city-container');
+     // Select the card-template in the DOM
+     const cardTemplate = document.getElementById('card-template');
+     city.forEach((city) => {
+       // Create a cardTemplate element in javascript to start populating data
+       const card = document.importNode(cardTemplate.content, true);
+       card.querySelector('.city-name').textContent = city.name;
+       card.querySelector('.city-temp').textContent = city.temp;
+       card.querySelector('.city-wind').textContent = city.wind;
+       card.querySelector('.city-humidity').textContent = city.humidity;
+       citiesContainer.appendChild(card);
+     });
+   };
 
   cityFormEl.addEventListener("submit", formSubmitHandler);

@@ -4,9 +4,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>Weather Dashboard</title>
 </head>
 <body>
+  <div class="container">
+    
+   <div class=" jumbotron-fluid bg-dark text-white text-center">
+     <div class="container">
+       <h1 class="display-4 ">Weather Dashboard</h1>
+     </div>
+   </div>
   <header>
     <section class="hero">
 
@@ -29,7 +38,7 @@
       
       <!-- Right Column-->
       <div>
-        <div class="city-container"></div>
+        <div id="city-container"></div>
       </div>
       <div>
         <h2>5 Day Forecast:</h2>
@@ -43,9 +52,18 @@
 <template id="card-template">
   <div class="card">
     <h3 class="city-name"></h3>
-    <p class="card-temp"></p>
-    <p class="card-wind"></p>
-    <p class="card-humidity"></p>
+    <p class="city-temp"></p>
+    <p class="city-wind"></p>
+    <p class="city-humidity"></p>
+    <p class="city-uvi"></p>
+  </div>
+</template>
+<template id="day-card-template">
+  <div class="day-card">
+    <h3 class="day-of-the-week"></h3>
+    <p class="day-city-temp"></p>
+    <p class="day-city-wind"></p>
+    <p class="day-city-humidity"></p>
   </div>
 </template>
   <script src="./assets/js/script.js"> </script>
